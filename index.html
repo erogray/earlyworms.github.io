@@ -6,81 +6,102 @@
   <title>Early Worms</title>
   <style>
     :root {
-      --bg-color: #111;
-      --text-color: #eee;
-      --accent-color: #f5426f;
-      --font-main: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      --bg: #000;
+      --text: #f0f0f0;
+      --accent: #cc0000;
+      --overlay-opacity: 0.3;
+      --font: 'Segoe UI', sans-serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
     body {
-      margin: 0;
-      padding: 0;
-      background-color: var(--bg-color);
-      color: var(--text-color);
-      font-family: var(--font-main);
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
       line-height: 1.6;
     }
 
     header {
-      text-align: center;
-      padding: 2rem 1rem;
+      position: relative;
+      height: 60vh;
+      background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Caenorhabditis_elegans_hermaphrodite_adult-en.svg/1584px-Caenorhabditis_elegans_hermaphrodite_adult-en.svg.png?20190714201737') center/contain no-repeat;
       background-color: #000;
     }
 
+    header::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, var(--overlay-opacity));
+    }
+
     header h1 {
-      margin: 0;
-      font-size: 2.5rem;
-      color: var(--accent-color);
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%);
+      text-align: center;
+      font-size: 3rem;
+      color: var(--accent);
+      text-shadow: 0 0 10px #000;
     }
 
     nav {
-      margin-top: 1rem;
+      position: absolute;
+      bottom: 20px;
+      width: 100%;
+      text-align: center;
     }
 
     nav a {
-      color: var(--text-color);
       margin: 0 1rem;
+      color: var(--text);
       text-decoration: none;
       border-bottom: 1px solid transparent;
+      font-weight: bold;
     }
 
     nav a:hover {
-      border-bottom: 1px solid var(--accent-color);
+      border-color: var(--accent);
     }
 
     main {
       max-width: 800px;
-      margin: 2rem auto;
-      padding: 0 1rem;
-    }
-
-    section {
-      margin-bottom: 3rem;
+      padding: 2rem 1rem;
+      margin: auto;
     }
 
     h2 {
-      border-left: 4px solid var(--accent-color);
-      padding-left: 1rem;
-      color: var(--accent-color);
+      border-left: 4px solid var(--accent);
+      padding-left: 0.5rem;
+      margin-bottom: 0.5rem;
+      color: var(--accent);
     }
 
     .gallery {
-      display: flex;
-      flex-wrap: wrap;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
       gap: 1rem;
     }
 
     .gallery img {
       width: 100%;
-      max-width: 250px;
-      border: 1px solid #333;
+      border: 2px solid #222;
     }
 
     footer {
       text-align: center;
-      padding: 2rem 1rem;
+      padding: 1.5rem;
       font-size: 0.9rem;
-      color: #777;
+      background: #111;
+    }
+
+    a {
+      color: var(--accent);
     }
   </style>
 </head>
@@ -99,32 +120,35 @@
     <section id="about">
       <h2>About</h2>
       <p>
-        Early Worms is a music project in Portland, Oregon.
+        Early Worms is an experimental metal project that draws inspiration from
+        biological decay, microscopic systems, and industrial soundscapes.
+        The name is literal. The worms are watching.
       </p>
     </section>
 
     <section id="music">
       <h2>Music</h2>
-      <p>Listen to our recordings below:</p>
+      <p>Stream or download our tracks:</p>
       <ul>
-        <li><strong>Fractal Collapse</strong> - <a href="https://example.com/fractal-collapse.mp3">Download</a></li>
-        <li><strong>Echo Lattice</strong> - <a href="https://example.com/echo-lattice.mp3">Download</a></li>
-        <li><strong>Core Implosion</strong> - <a href="https://example.com/core-implosion.mp3">Download</a></li>
+        <li><strong>Subterranean Echoes</strong> – <a href="#">Download</a></li>
+        <li><strong>Worm Ritual</strong> – <a href="#">Download</a></li>
+        <li><strong>Decay Pattern</strong> – <a href="#">Download</a></li>
       </ul>
     </section>
 
     <section id="gallery">
       <h2>Gallery</h2>
       <div class="gallery">
-        <img src="images/live1.jpg" alt="Live performance 1" />
-        <img src="images/studio1.jpg" alt="Studio session 1" />
-        <img src="images/live2.jpg" alt="Live performance 2" />
+        <img src="images/studio.jpg" alt="Studio session" />
+        <img src="images/live.jpg" alt="Live performance" />
+        <img src="images/collage.jpg" alt="Artistic collage" />
       </div>
     </section>
 
     <section id="contact">
       <h2>Contact</h2>
-      <p>Email us at <a href="mailto:contact@earlyworms.com">contact@earlyworms.com</a> for booking, collaboration, or just to say hi.</p>
+      <p>Email: <a href="mailto:earlyworms@example.com">earlyworms@example.com</a></p>
+      <p>Follow us on social media: [links here]</p>
     </section>
   </main>
 
@@ -133,17 +157,11 @@
   </footer>
 
   <script>
-    // Smooth scrolling behavior for navigation links
-    document.querySelectorAll('nav a').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
+    document.querySelectorAll('nav a').forEach(a => {
+      a.addEventListener('click', e => {
         e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          window.scrollTo({
-            top: target.offsetTop - 60,
-            behavior: 'smooth'
-          });
-        }
+        const t = document.querySelector(a.getAttribute('href'));
+        if (t) window.scrollTo({ top: t.offsetTop - 50, behavior: 'smooth' });
       });
     });
   </script>
